@@ -1,73 +1,50 @@
-const content = null || document.getElementById('container')
+// Default Components
+import Footer from './views/components/Footer.js'
+import Nav from './views/components/Nav.js'
 
-let header = document.createElement('header')
+// Components
+import Home   from './views/pages/Home.js'
+import Dash   from './views/pages/Dash.js'
+import Login  from './views/pages/Login.js'
+import SignUp from './views/pages/SignUp.js'
+import Error404 from './views/pages/Error404.js'
 
-let app = document.createElement('div')
+// Utils
+import Utils from './service/Utils.js'
 
-let footer = document.createElement('footer')
-footer.setAttribute( 'class', 'my-5 pt-5 text-muted text-center text-small')
-footer.innerHTML = `<p>© Copyrigth 2021</p>`
+let routes = {
+    '/':         Home,
+    '/signup':    SignUp,
+    '/login':     Login,
+    '/dashboard': Dash
+}
 
-header.setAttribute( 'class', 'align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm')
-header.innerHTML = `
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container m-auto" width="100%">
-            <a class="navbar-brand" href="#">
-                <img src="img/bootstrap-5.svg" class="img-fluid" width="200px" alt="">
-            </a>
-            <button class="navbar-toggler" type="button">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-                <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="aula01.html">Desafio 2</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link disabled" href="#">Desabilitado</a>
-                </li>
-            </ul>
-            </div>
-        </div>
-    </nav>
-`
-app.setAttribute('class', 'container')
-app.innerHTML = `
-    <div class="row mt-5 mb-5">
-        <div class="col-md-6 m-auto">
-            <div class="fluid text-center pt-5">
-                <h2>Formulário de login</h2>
-                <p>Seja bem vindo ao Bootstrap</p>
-            </div>
-            <img src="img/bootstrap-icons.png" class="img-fluid m-auto" width="100%" alt="Imagem resposiva">
-        </div>
-        <div class="col-md-6 m-auto">
-            <div class="card">
-                <h2 class="mt-5 mb-4 text-center">Informe aqui seu usuário e senha</h2>
-                <form class="p-5">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Seu email</label>
-                        <input type="email" class="form-control  mb-4">
-                        <small class="form-text text-muted">Adicione aqui seu email.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="senha">Senha</label>
-                        <input type="password" class="form-control  mb-4">
-                    </div>
-                    <div class="form-group form-check mb-4">
-                        <input type="checkbox" class="form-check-input">
-                        <label class="form-check-label" for="manter">Me mantenha conectado</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Clique aqui para logar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-`
+// Código de roteador. Pegar URL e verificar na nossa lista de routes e renderizar.
+const router = async ( ) => {
+    
+    // Seletores    
+    const header  = null || document.getElementById('header')
+    const content = null || document.getElementById('container')
+    const footer  = null || document.getElementById('footer')
+    
+    // Renderizar o cabeçalho e rodapé da página
+    header.innerHTML  = await Nav.render();
+    await Nav.after_render();
+    // content.innerHTML = Home.render();
+    footer.innerHTML  = await Footer.render();
+    await Footer.after_render();
 
-content.appendChild(header)
-content.appendChild(app)
-content.appendChild(footer)
+    let request = Utils.parseRequestURL();
+    let parseURL = (request.resource ? '/' + request.resource: '/') + ( request.verb? '/' + request.verb: '')
+    
+    let page = routes[parseURL] ? routes[parseURL] : Error404
+
+    content.innerHTML = await page.render();
+    await page.after_render();
+}
+
+// Observar as mudanças na URL
+window.addEventListener('hashchange', router)
+
+// Carregamento da página
+window.addEventListener('load', router)
