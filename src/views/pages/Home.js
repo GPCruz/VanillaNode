@@ -3,34 +3,18 @@ let Home = {
         let view = `
         <div class="container">
         <div class="row mt-5 mb-5">
-            <div class="col-md-6 m-auto">
-                <div class="fluid text-center pt-5">
-                    <h2>Formulário de login</h2>
-                    <p>Seja bem vindo ao Bootstrap</p>
-                </div>
+        <div class="col-md-6 m-auto">
+        <div class="container">
+            <h2 class="mt-5 mb-4 text-center">Seja bem vindo!</h2>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et purus efficitur, vulputate libero in, dapibus libero. Donec velit felis, posuere in tellus vel, congue pellentesque odio. Mauris imperdiet euismod arcu, ac suscipit sapien lacinia sodales. Etiam venenatis nisi nec libero tincidunt, et convallis leo auctor. Curabitur pellentesque libero quis scelerisque mattis. Mauris pellentesque enim ac tincidunt posuere. Ut finibus, elit eu accumsan fringilla, sapien ipsum ultricies ex, et malesuada elit ante sit amet lectus. Donec venenatis sollicitudin libero eu tincidunt. Cras sit amet finibus nunc. Nulla dapibus pharetra purus id malesuada. Nam maximus tellus eget arcu scelerisque molestie. Integer nunc urna, laoreet id tellus sit amet, dignissim congue odio.
+            </p>
+        </div>
+        </div>
+        <div class="col-md-6 m-auto">
                 <img src="img/bootstrap-icons.png" class="img-fluid m-auto" width="100%" alt="Imagem resposiva">
             </div>
-            <div class="col-md-6 m-auto">
-                <div class="card">
-                    <h2 class="mt-5 mb-4 text-center">Informe aqui seu usuário e senha</h2>
-                    <form class="p-5">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Seu email</label>
-                            <input type="email" class="form-control  mb-4">
-                            <small class="form-text text-muted">Adicione aqui seu email.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="senha">Senha</label>
-                            <input type="password" class="form-control  mb-4">
-                        </div>
-                        <div class="form-group form-check mb-4">
-                            <input type="checkbox" class="form-check-input">
-                            <label class="form-check-label" for="manter">Me mantenha conectado</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary" onclick="">Clique aqui para logar</button>
-                    </form>
-                </div>
-            </div>
+            
         </div>
     </div>
         `

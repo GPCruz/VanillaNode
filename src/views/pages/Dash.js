@@ -3,31 +3,24 @@ let Dash = {
         let view = `
         <div class="container">
         <div class="row mt-5 mb-5">
-            <div class="col-md-6 m-auto">
-                <div class="fluid text-center pt-5">
-                    <h2>Formulário de login</h2>
-                    <p>Dashboard</p>
-                </div>
-                <img src="img/bootstrap-icons.png" class="img-fluid m-auto" width="100%" alt="Imagem resposiva">
-            </div>
-            <div class="col-md-6 m-auto">
+            <div class="col-md-4 m-auto">
                 <div class="card">
-                    <h2 class="mt-5 mb-4 text-center">Informe aqui seu usuário e senha</h2>
-                    <form class="p-5">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Seu email</label>
-                            <input type="email" class="form-control  mb-4">
-                            <small class="form-text text-muted">Adicione aqui seu email.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="senha">Senha</label>
-                            <input type="password" class="form-control  mb-4">
-                        </div>
-                        <div class="form-group form-check mb-4">
-                            <input type="checkbox" class="form-check-input">
-                            <label class="form-check-label" for="manter">Me mantenha conectado</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary" onclick="">Clique aqui para logar</button>
+                    <h2 class="mt-5 mb-4 text-center">Card 01</h2>
+                </div>
+            </div>
+            <div class="col-md-4 m-auto">
+                <div class="card">
+                    <h2 class="mt-5 mb-4 text-center">Card 02</h2>
+                </div>
+            </div>
+            <div class="col-md-4 m-auto">
+                <div class="card">
+                    <h2 class="mt-5 mb-4 text-center">Card 03</h2>
+                </div>
+            </div>
+            <div class="col-md-12 m-auto">
+                <div class="card">
+                    <h2 class="mt-5 mb-4 text-center">Card 04</h2>
                     </form>
                 </div>
             </div>

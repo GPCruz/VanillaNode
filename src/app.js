@@ -48,3 +48,4 @@ window.addEventListener('hashchange', router)
 
 // Carregamento da página
 window.addEventListener('load', router)
+

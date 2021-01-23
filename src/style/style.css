@@ -1,0 +1,10 @@
+p{
+    padding: 20px;
+}
+.icon--sign-in{
+    padding: 10px;
+    font-size: 18em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
