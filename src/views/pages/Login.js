@@ -1,3 +1,8 @@
+import baseURL from '../../service/baseURL.js'
+
+let loginURL = baseURL + 'login'
+console.log('Login URL: ' + loginURL)
+
 let Login = {
     render : () => {
         let view = `
@@ -15,18 +20,18 @@ let Login = {
                 <h2 class="mt-5 mb-4 text-center">Informe aqui seu usuário e senha</h2>
                 <form class="p-5">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Seu email</label>
-                        <input type="email" class="form-control  mb-4">
+                        <label for="exampleInputEmail1">Usuário</label>
+                        <input id="username" type="text" class="form-control  mb-4">
                     </div>
                     <div class="form-group">
                         <label for="senha">Senha</label>
-                        <input type="password" class="form-control  mb-4">
+                        <input id="password" type="password" class="form-control  mb-4">
                     </div>
                     <div class="form-group form-check mb-4">
                         <input type="checkbox" class="form-check-input">
                         <label class="form-check-label" for="manter">Me mantenha conectado</label>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="">Clique aqui para logar</button>
+                    <button id="submit_login" type="submit" class="btn btn-primary">Clique aqui para logar</button>
                 </form>
             </div>
         </div>
@@ -35,8 +40,35 @@ let Login = {
         
         return view
     },
-    after_render: () => {
+    after_render: async() => {
+        
+        document.getElementById('username').value = 'gpcruz'
+        document.getElementById('password').value = '123456789'
+        // document.getElementById('userCPF').addEventListener('input', trataCPF)
+        document.getElementById('submit_login').addEventListener('click', () =>{
+            let userLogin       = document.getElementById('username').value,
+                passwordVal     = document.getElementById('password').value
+                
+            axios.post(loginURL,{
+                usuario: userLogin,
+                senha: passwordVal
+            }).then( res => {
+                console.log( res )
+                if (res.status == 200 ){
+                    // alert('Login realizado com sucesso!')
+                    
+                    localStorage.setItem('@token', res.data.token)
+                    sessionStorage.setItem('@token', res.data.token)
+                    // Cookie.set('@token', res.data.token, {expires: 7})
+                }
+                else{
+                    // console.log( res )
+                    // console.log( res.status )
+                }
+                
 
+            })
+        })
     }
 }
 
