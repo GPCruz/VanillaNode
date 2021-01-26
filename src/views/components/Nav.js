@@ -8,31 +8,31 @@ let Nav = {
                         <a class="navbar-brand" href="#">
                             <img src="img/bootstrap-5.svg" class="img-fluid" width="200px" alt="">
                         </a>
-                        <button class="navbar-toggler" type="button">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-                            <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="#/dashboard">Dashboard</a>
-                            </li>
-                            ${!IsAuth?(`
-                            <li class="nav-item">
-                            <a class="nav-link" href="#/login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="#/signup">SignUp</a>
-                            </li>
-                            `):''}
-                            ${IsAuth?(`
-                            <li class="nav-item">
-                            <a id="logout" class="nav-link" href="#">Logout</a>
-                            </li>
-                            `):''}
-                        </ul>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#/dashboard">Dashboard</a>
+                                </li>
+                                ${!IsAuth?(`
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#/login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#/signup">SignUp</a>
+                                </li>
+                                `):''}
+                                ${IsAuth?(`
+                                <li class="nav-item">
+                                    <a id="logout" class="nav-link" href="#">Logout</a>
+                                </li>
+                                `):''}
+                            </ul>
                         </div>
                     </div>
                 </nav>
