@@ -42,32 +42,37 @@ let Login = {
     },
     after_render: async() => {
         
-        document.getElementById('username').value = 'gpcruz'
-        document.getElementById('password').value = '123456789'
+        // document.getElementById('username').value = 'gpcruz'
+        // document.getElementById('password').value = '123456789'
         // document.getElementById('userCPF').addEventListener('input', trataCPF)
         document.getElementById('submit_login').addEventListener('click', () =>{
             let userLogin       = document.getElementById('username').value,
                 passwordVal     = document.getElementById('password').value
-                
-            axios.post(loginURL,{
-                usuario: userLogin,
-                senha: passwordVal
-            }).then( res => {
-                console.log( res )
-                if (res.status == 200 ){
-                    // alert('Login realizado com sucesso!')
+            try{
+                axios.post(loginURL,{
+                    usuario: userLogin,
+                    senha: passwordVal
+                }).then( res => {
+                    console.log( res )
+                    if (res.status == 200 ){
+                        // alert('Login realizado com sucesso!')
+                        
+                        localStorage.setItem('@token', res.data.token)
+                        sessionStorage.setItem('@token', res.data.token)
+                        // Cookie.set('@token', res.data.token, {expires: 7})
+                    }
+                    else{
+                        alert('Não foi possível realizar o login\n Verifique os dados e tente novamente.')
+                        // console.log( res )
+                        // console.log( res.status )
+                    }
                     
-                    localStorage.setItem('@token', res.data.token)
-                    sessionStorage.setItem('@token', res.data.token)
-                    // Cookie.set('@token', res.data.token, {expires: 7})
-                }
-                else{
-                    // console.log( res )
-                    // console.log( res.status )
-                }
-                
-
-            })
+    
+                })
+            }    catch(err){
+                console.log('Erro: ', err)
+            }            
+            
         })
     }
 }
