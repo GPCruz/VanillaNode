@@ -1,10 +1,12 @@
 import baseURL from '../../service/baseURL.js'
+import IsAuthenticated from '../../service/isAuth.js'
 
 let loginURL = baseURL + 'login'
 console.log('Login URL: ' + loginURL)
 
 let Login = {
     render : () => {
+        let IsAuth = IsAuthenticated(localStorage.getItem('@token'), 'dashboard');
         let view = `
         <div class="container">
         <div class="row mt-5 mb-5">
@@ -41,10 +43,6 @@ let Login = {
         return view
     },
     after_render: async() => {
-        
-        // document.getElementById('username').value = 'gpcruz'
-        // document.getElementById('password').value = '123456789'
-        // document.getElementById('userCPF').addEventListener('input', trataCPF)
         document.getElementById('submit_login').addEventListener('click', () =>{
             let userLogin       = document.getElementById('username').value,
                 passwordVal     = document.getElementById('password').value
@@ -53,20 +51,14 @@ let Login = {
                     usuario: userLogin,
                     senha: passwordVal
                 }).then( res => {
-                    // console.log( res )
                     if (res.status == 200 ){
-                        // alert('Login realizado com sucesso!')
                         window.location.replace('#/dashboard')
                         localStorage.setItem('@token', res.data.token)
-                        // sessionStorage.setItem('@token', res.data.token)
-                        // Cookie.set('@token', res.data.token, {expires: 7})
-                        document.userDataAccount = res.data
+                        localStorage.setItem('userDataAccount', JSON.stringify(res.data))
 
                     }
                     else{
                         alert('Não foi possível realizar o login\n Verifique os dados e tente novamente.')
-                        // console.log( res )
-                        // console.log( res.status )
                     }
                     
     

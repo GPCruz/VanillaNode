@@ -1,46 +1,7 @@
 import baseURL from '../../service/baseURL.js'
+import IsAuthenticated from '../../service/isAuth.js'
 
 let registerURL = baseURL + 'usuarios'
-//console.log('Register URL: ' + registerURL)
-// console.log('https://accenture-java-desafio.herokuapp.com/usuarios' == registerURL)
-
-
-// document.postRegisterNewUser = async () =>{
-//     const options = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     };
-//     try{
-//         const RegisterData = {
-//             cpf: document.getElementById('userCPF').value,
-//             login:document.getElementById('username').value,
-//             nome: document.getElementById('name').value,
-//             senha:document.getElementById('password').value
-//         }
-
-//         // const response = await fetch(baseURL, {
-//         //     method: 'post',
-//         //     body: JSON.stringify( RegisterData )
-//         // })
-//         // .then(
-//         //     res => {
-//         //     }
-//         // )
-
-        
-//         axios.post(baseURL + '/usuarios', RegisterData, options).then(
-//             res => {
-//                 console.log(res.data)
-//             }
-//         )
-//         console.log(JSON)
-//         return JSON
-//     } catch(err){
-//         console.log('Ocorreu um erro: ', err)
-//     }
-// }
 
 let postFunction = {}
 
@@ -78,6 +39,7 @@ function maskCPF(cpf){
 
 let SignUp = {
     render : () => {
+        let IsAuth = IsAuthenticated(localStorage.getItem('@token'), 'dashboard');
         //window.postData = postRegisterNewUser();
         let view = `
             <div class="container">

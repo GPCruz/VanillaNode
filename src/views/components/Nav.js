@@ -1,5 +1,6 @@
 let Nav = {
     render : async ( ) => {
+        let IsAuth = localStorage.getItem('@token')
         let view = `
             <header class="align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -18,12 +19,19 @@ let Nav = {
                             <li class="nav-item">
                             <a class="nav-link" href="#/dashboard">Dashboard</a>
                             </li>
+                            ${!IsAuth?(`
                             <li class="nav-item">
                             <a class="nav-link" href="#/login">Login</a>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link" href="#/signup">SignUp</a>
                             </li>
+                            `):''}
+                            ${IsAuth?(`
+                            <li class="nav-item">
+                            <a id="logout" class="nav-link" href="#">Logout</a>
+                            </li>
+                            `):''}
                         </ul>
                         </div>
                     </div>
@@ -33,6 +41,14 @@ let Nav = {
         return view
     },
     after_render: async ( ) => {
+        let IsAuth = localStorage.getItem('@token')
+        if (IsAuth){
+            // Event Listener dos componentes que dependem de autenticação para serem exibidos
+            document.getElementById('logout').addEventListener('click', function (){
+                localStorage.clear()
+                window.location.replace('#/login')
+            })
+        }
 
     }
 }
