@@ -53,13 +53,15 @@ let Login = {
                     usuario: userLogin,
                     senha: passwordVal
                 }).then( res => {
-                    console.log( res )
+                    // console.log( res )
                     if (res.status == 200 ){
                         // alert('Login realizado com sucesso!')
-                        
+                        window.location.replace('#/dashboard')
                         localStorage.setItem('@token', res.data.token)
-                        sessionStorage.setItem('@token', res.data.token)
+                        // sessionStorage.setItem('@token', res.data.token)
                         // Cookie.set('@token', res.data.token, {expires: 7})
+                        document.userDataAccount = res.data
+
                     }
                     else{
                         alert('Não foi possível realizar o login\n Verifique os dados e tente novamente.')
@@ -71,6 +73,7 @@ let Login = {
                 })
             }    catch(err){
                 console.log('Erro: ', err)
+                alert('Não foi possível realizar o login\n Verifique os dados e tente novamente.')
             }            
             
         })
