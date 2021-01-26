@@ -130,10 +130,10 @@ let SignUp = {
                         // console.log( res )
                         // console.log( res.status )
                         // console.log('Cadastro realizado com sucesso!')
-                        
                         localStorage.setItem('@token', res.data.token)
                         sessionStorage.setItem('@token', res.data.token)
                         // Cookie.set('@token', res.data.token, {expires: 7})
+                        window.location.replace('#/dashboard')
                     }
                     else{
                         // console.log( res )

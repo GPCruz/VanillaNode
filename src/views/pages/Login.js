@@ -2,7 +2,7 @@ import baseURL from '../../service/baseURL.js'
 import IsAuthenticated from '../../service/isAuth.js'
 
 let loginURL = baseURL + 'login'
-console.log('Login URL: ' + loginURL)
+//console.log('Login URL: ' + loginURL)
 
 let Login = {
     render : () => {
