@@ -1,5 +1,16 @@
+let IsAuthenticated = async => {
+    if (!localStorage.getItem('@token')){
+        console.log('Não autenticado')
+        window.location.replace('#/login')
+    } else {
+        console.log('Autenticado')
+    }
+
+}
+
 let Dash = {
     render : async () => {
+        let IsAuth = IsAuthenticated();
         let view = `
         <div class="container">
         <div class="row mt-5 mb-5">
