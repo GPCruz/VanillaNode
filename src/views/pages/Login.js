@@ -5,8 +5,9 @@ let loginURL = baseURL + 'login'
 //console.log('Login URL: ' + loginURL)
 
 let Login = {
-    render : () => {
-        let IsAuth = IsAuthenticated(localStorage.getItem('@token'), 'dashboard');
+    render : async() => {
+        let IsAuth = await IsAuthenticated(localStorage.getItem('@token'));
+        if (IsAuth) window.location.replace('#/dashboard')
         let view = `
         <div class="container">
         <div class="row mt-5 mb-5">

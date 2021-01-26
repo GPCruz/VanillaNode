@@ -2,8 +2,7 @@ import baseURL from '../../service/baseURL.js'
 import IsAuthenticated from '../../service/isAuth.js'
 
 let registerURL = baseURL + 'usuarios'
-
-let postFunction = {}
+let loginURL = baseURL + 'login'
 
 let trataCPF = (e)=>{
     let inputCPF = e.target;
@@ -38,9 +37,9 @@ function maskCPF(cpf){
 
 
 let SignUp = {
-    render : () => {
-        let IsAuth = IsAuthenticated(localStorage.getItem('@token'), 'dashboard');
-        //window.postData = postRegisterNewUser();
+    render : async() => {
+        let IsAuth = await IsAuthenticated(localStorage.getItem('@token'));
+        if (IsAuth) window.location.replace('#/dashboard')
         let view = `
             <div class="container">
                 <div class="row mt-5 mb-5">
@@ -126,19 +125,20 @@ let SignUp = {
                     senha: passwordVal
                 }).then( res => {
                     if (res.status == 200 ){
-                        alert('Cadastro realizado com sucesso!')
-                        // console.log( res )
-                        // console.log( res.status )
-                        // console.log('Cadastro realizado com sucesso!')
-                        localStorage.setItem('@token', res.data.token)
-                        sessionStorage.setItem('@token', res.data.token)
-                        // Cookie.set('@token', res.data.token, {expires: 7})
-                        window.location.replace('#/dashboard')
+                        axios.post(loginURL,{
+                            usuario: userLogin,
+                            senha: passwordVal
+                        }).then( res => {
+                            localStorage.setItem('@token', res.data.token)
+                            localStorage.setItem('userDataAccount', JSON.stringify(res.data))
+                            alert('Cadastro realizado com sucesso!')
+                            window.location.replace('#/dashboard')
+                            })
                     }
-                    else{
-                        // console.log( res )
-                        // console.log( res.status )
-                    }
+                    // else{
+                    //     // console.log( res )
+                    //     // console.log( res.status )
+                    // }
                     
 
                 })

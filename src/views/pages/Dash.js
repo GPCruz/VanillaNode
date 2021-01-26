@@ -3,7 +3,7 @@ import IsAuthenticated from '../../service/isAuth.js'
 let Dash = {
     render : async () => {
         let view = ''
-        let IsAuth = await IsAuthenticated(!localStorage.getItem('@token'), 'login');
+        let IsAuth = await IsAuthenticated(localStorage.getItem('@token'));
         if (IsAuth){
             let userData = JSON.parse(localStorage.getItem('userDataAccount'))
             const { usuario, conta } = userData

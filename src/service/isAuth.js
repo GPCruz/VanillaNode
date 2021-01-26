@@ -1,8 +1,9 @@
-let IsAuthenticated = async (auth, route) => {
-    if (auth) {
-      window.location.replace("#/"+route);
+let IsAuthenticated = async (auth) => {
+    let authenticated = auth!=null
+    if ((!authenticated)&&(window.location.hash != '#/signup')) {
+            window.location.replace("#/login");
     }
-  };
-  
-  export default IsAuthenticated;
-  
+    return authenticated
+};
+
+export default IsAuthenticated;
