@@ -43,7 +43,7 @@ let Nav = {
     after_render: async ( ) => {
         let IsAuth = localStorage.getItem('@token')
         if (IsAuth){
-            // Event Listener dos componentes que dependem de autenticação para serem exibidos
+            // Códigos que dependem de componentes gerados apenas após a autenticação
             document.getElementById('logout').addEventListener('click', function (){
                 localStorage.clear()
                 window.location.replace('#/login')

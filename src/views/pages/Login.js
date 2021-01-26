@@ -2,7 +2,6 @@ import baseURL from '../../service/baseURL.js'
 import IsAuthenticated from '../../service/isAuth.js'
 
 let loginURL = baseURL + 'login'
-//console.log('Login URL: ' + loginURL)
 
 let Login = {
     render : async() => {
@@ -35,6 +34,7 @@ let Login = {
                         <label class="form-check-label" for="manter">Me mantenha conectado</label>
                     </div>
                     <button id="submit_login" type="submit" class="btn btn-primary">Clique aqui para logar</button>
+                    <button id="go_register" class="btn btn-primary">Não tenho cadastro</button>
                 </form>
             </div>
         </div>
@@ -44,30 +44,36 @@ let Login = {
         return view
     },
     after_render: async() => {
+        document.getElementById('go_register').addEventListener('click', () =>{
+            window.location.replace('#/signup')
+        })
         document.getElementById('submit_login').addEventListener('click', () =>{
             let userLogin       = document.getElementById('username').value,
                 passwordVal     = document.getElementById('password').value
-            try{
-                axios.post(loginURL,{
-                    usuario: userLogin,
-                    senha: passwordVal
-                }).then( res => {
-                    if (res.status == 200 ){
-                        window.location.replace('#/dashboard')
-                        localStorage.setItem('@token', res.data.token)
-                        localStorage.setItem('userDataAccount', JSON.stringify(res.data))
+            
+            axios.post(loginURL,{
+                usuario: userLogin,
+                senha: passwordVal
+            }).then( res => {
+                if (res.status == 200 ){
+                    window.location.replace('#/dashboard')
+                    localStorage.setItem('@token', res.data.token)
+                    localStorage.setItem('userDataAccount', JSON.stringify(res.data))
+                }
+                
 
-                    }
-                    else{
-                        alert('Não foi possível realizar o login\n Verifique os dados e tente novamente.')
-                    }
-                    
-    
-                })
-            }    catch(err){
+            }).catch( function(err){
+                let res = err.response
+                let message = res.data.error
                 console.log('Erro: ', err)
-                alert('Não foi possível realizar o login\n Verifique os dados e tente novamente.')
-            }            
+                console.log('Response: ', res)
+                console.log('Response.data: ', res.data)
+                alert(`
+                        Não foi possível realizar o login:
+                        -> ${message}
+
+                        Verifique os dados e tente novamente.`)
+            })            
             
         })
     }
