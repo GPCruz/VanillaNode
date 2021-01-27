@@ -1,37 +1,81 @@
 import IsAuthenticated from '../../service/isAuth.js'
+import baseURL from '../../service/baseURL.js'
+
+const RequestDataAccount = async () => {
+
+    let dataUser = JSON.parse(localStorage.getItem('userDataAccount'))
+    let {token, usuario:{login} } = dataUser    
+
+    let headersDefault = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    }
+
+    const response = await axios.get(`${baseURL}lancamentos/planos-conta?login=${login}`, headersDefault)
+    
+    const allData = response.data
+    // .then(
+    //     res => {
+    //         let ReturnData = res.data;
+    //         const Montacomponents = ReturnData.map( data => (`
+    //         <div class="card" style="width: 100%;">
+    //                 <div class="card-body">
+    //                     <h5 class="card-title">${data.descricao}</h5>
+    //                     <h6 class="card-subtitle mb-2 text-muted">${data.login}</h6>
+    //                     <p class="card-text">Text</p>
+    //                     <a href="#" class="card-link">Card link</a>
+    //                     <a href="#" class="card-link">Other link</a>
+    //                 </div>
+    //             </div>
+    //         `))
+    //     }
+    // )
+}
 
 let Dash = {
     render : async () => {
-        let view = ''
+        let ComponentsData = await RequestDataAccount()
+        let userData = JSON.parse(localStorage.getItem('userDataAccount'))
+        const { usuario: { nome }, conta } = userData
+        
+        //let fullName = nome.split(' ')
         let IsAuth = await IsAuthenticated(localStorage.getItem('@token'));
+        let view = ''
         if (IsAuth){
             let userData = JSON.parse(localStorage.getItem('userDataAccount'))
             const { usuario, conta } = userData
             view = `
             <div class="container">
-            <div class="row mt-5 mb-5">
-                <div class="col-md-4 m-auto">
-                    <div class="card">
-                        <h2 class="mt-5 mb-4 text-center">Olá, ${usuario.nome}</h2>
-                        <p>Seu saldo em conta é de: ${conta.saldo.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
+            <h1>Olá, ${usuario.nome}</h1>
+            <div class="row align-itens-center mt-5 mb-5 justify-content-between">
+                <div class="card col-md-3  col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Seu saldo em conta é de: ${conta.saldo.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
-                <div class="col-md-4 m-auto">
-                    <div class="card">
-                        <h2 class="mt-5 mb-4 text-center">Card 02</h2>
-                        <p></p>
+                <div class="card col-md-3  col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
-                <div class="col-md-4 m-auto">
-                    <div class="card">
-                        <h2 class="mt-5 mb-4 text-center">Card 03</h2>
-                        <p></p>
+                <div class="card col-md-3  col-sm-12">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
-                <div class="col-md-12 m-auto">
-                    <div class="card">
-                        <h2 class="mt-5 mb-4 text-center">Card 04</h2>
-                        </form>
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +85,7 @@ let Dash = {
         return view
     },
     after_render: async () => {
-
+        
     }
 }
 

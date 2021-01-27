@@ -33,8 +33,8 @@ let Login = {
                         <input type="checkbox" class="form-check-input">
                         <label class="form-check-label" for="manter">Me mantenha conectado</label>
                     </div>
-                    <button id="submit_login" type="submit" class="btn btn-primary">Clique aqui para logar</button>
-                    <button id="go_register" class="btn btn-primary">Não tenho cadastro</button>
+                    <button id="submit_login" type="button" class="btn btn-primary">Clique aqui para logar</button>
+                    <button id="go_register" type="button" class="btn btn-primary">Não tenho cadastro</button>
                 </form>
             </div>
         </div>
@@ -60,8 +60,6 @@ let Login = {
                     localStorage.setItem('@token', res.data.token)
                     localStorage.setItem('userDataAccount', JSON.stringify(res.data))
                 }
-                
-
             }).catch( function(err){
                 let res = err.response
                 let message = res.data.error
